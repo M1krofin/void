@@ -28,7 +28,6 @@ spawns = [
   { id = "giant_rat_dark_injured", x = 3215, y = 3172 },
   { id = "giant_rat_dark_injured", x = 3202, y = 3161 },
   { id = "giant_rat_dark_injured", x = 3233, y = 3161 },
-  { id = "ilona", x = 3244, y = 3197, members = true },
   { id = "giant_rat_lumbridge_swamp", x = 3221, y = 3195, members = true },
   { id = "giant_rat_lumbridge_swamp", x = 3235, y = 3172, members = true },
   { id = "giant_spider_lumbridge", x = 3186, y = 3190, members = true },

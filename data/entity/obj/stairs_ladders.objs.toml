@@ -173,3 +173,7 @@ examine = "I can climb down this."
 [lumbridge_church_3rd_floor_ladder_down_west]
 id = 36991
 examine = "I can climb down this."
+
+[lumbridge_catacombs_entrance]
+id = 48797
+examine = "Stairs lead down into the catacombs beneath Lumbridge Church."

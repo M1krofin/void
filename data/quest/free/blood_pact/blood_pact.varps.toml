@@ -1,0 +1,6 @@
+[blood_pact]
+id = 166
+format = "map"
+persist = true
+default = "unstarted"
+values = { unstarted = 0, started = 1, after_cutscene = 2, completed = 3}

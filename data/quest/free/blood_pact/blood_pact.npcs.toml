@@ -1,0 +1,37 @@
+[reese_cutscene]
+id = 9637
+
+[reese_attackable]
+id = 9624
+
+[reese_defeated]
+id = 9625
+
+[kayle_cutscene]
+id = 9639
+
+[kayle_attackable]
+id = 9628
+
+[kayle_defeated]
+id = 9629
+
+[caitlin_attackable]
+id = 9626
+
+[caitlin_defeated]
+id = 9627
+
+[caitlin_cutscene]
+id = 9638
+
+[ilona_tied]
+id = 9630
+
+[ilona_cutscene]
+id = 9640
+
+[xenia_after_cutscene]
+id = 9634
+examine = "An old adventurer."
+

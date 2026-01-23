@@ -286,10 +286,6 @@ examine = "He grows the crops in this area."
 id = 2079
 examine = "He grows the crops in this area."
 
-[xenia]
-id = 9633
-examine = "An old adventurer."
-
 [dwarf_lumbridge_2]
 id = 4316
 
@@ -300,12 +296,8 @@ id = 4320
 id = 6540
 examine = "A collector of ancient artefacts."
 
-[xenia_2]
+[xenia]
 id = 11476
-examine = "An old adventurer."
-
-[xenia_3]
-id = 9634
 examine = "An old adventurer."
 
 [chief_thief_robin_lumbridge_2]

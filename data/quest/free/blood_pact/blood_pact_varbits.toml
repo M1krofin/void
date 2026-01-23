@@ -1,0 +1,4 @@
+[after_cultist_cutsecene]
+id = 3000
+persist = true
+format = "boolean"
