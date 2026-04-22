@@ -221,3 +221,10 @@ examine = "I wonder where they will take me."
 [player_safety_stairs_2nd_floor_down_north_west]
 id = 29659
 examine = "I wonder where they will take me."
+
+[lumbridge_catacombs_entrance]
+id = 48797
+examine = "Stairs lead down into the catacombs beneath Lumbridge Church."
+
+[lumbridge_catacombs_exit]
+id = 48798

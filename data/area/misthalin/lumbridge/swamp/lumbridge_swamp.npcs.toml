@@ -15,9 +15,6 @@ examine = "Overgrown vermin."
 [fremennik_shipmaster_lumbridge_swamp]
 id = 9708
 
-[ilona]
-id = 9632
-
 [giant_spider_lumbridge]
 id = 12352
 
@@ -52,9 +49,6 @@ id = 5871
 
 [sergeant_slimetoes_2]
 id = 5872
-
-[ilona_2]
-id = 9631
 
 [candle_seller]
 id = 1834
