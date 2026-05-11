@@ -8,10 +8,8 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
-import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
-import org.koin.test.mock.declareMock
 import world.gregs.voidps.cache.definition.data.AnimationDefinition
 import world.gregs.voidps.cache.definition.data.InterfaceComponentDefinition
 import world.gregs.voidps.cache.definition.data.InterfaceDefinition
@@ -30,23 +28,25 @@ internal class PlayerChatTest : DialogueTest() {
     override fun setup() {
         super.setup()
         player.accountName = "John"
-        declareMock<AnimationDefinitions> {
-            every { this@declareMock.get(any<String>()) } returns AnimationDefinition()
-            every { this@declareMock.get("expression_neutral").id } returns 9803
-            every { this@declareMock.getOrNull("expression_neutral1")?.id } returns 9803
-            every { this@declareMock.getOrNull("expression_neutral2")?.id } returns 9803
-            every { this@declareMock.getOrNull("expression_neutral3")?.id } returns 9803
-            every { this@declareMock.getOrNull("expression_neutral4")?.id } returns 9803
-            every { this@declareMock.get("expression_laugh").id } returns 9840
-            every { this@declareMock.getOrNull("expression_laugh1") } returns null
-            every { this@declareMock.getOrNull("expression_laugh2") } returns null
-            every { this@declareMock.getOrNull("expression_laugh3") } returns null
-            every { this@declareMock.getOrNull("expression_laugh4") } returns null
-            every { this@declareMock.getOrNull("expression_cackle1")?.id } returns 9840
-            every { this@declareMock.getOrNull("expression_cackle2")?.id } returns 9840
-            every { this@declareMock.getOrNull("expression_cackle3")?.id } returns 9840
-            every { this@declareMock.getOrNull("expression_cackle4")?.id } returns 9840
-        }
+        AnimationDefinitions.set(
+            arrayOf(
+                AnimationDefinition(9803, stringId = "expression_neutral"),
+                AnimationDefinition(9840, stringId = "expression_cackle"),
+                AnimationDefinition(9840, stringId = "expression_laugh"),
+            ),
+            mapOf(
+                "expression_neutral" to 0,
+                "expression_neutral1" to 0,
+                "expression_neutral2" to 0,
+                "expression_neutral3" to 0,
+                "expression_neutral4" to 0,
+                "expression_cackle" to 1,
+                "expression_laugh1" to 2,
+                "expression_laugh2" to 2,
+                "expression_laugh3" to 2,
+                "expression_laugh4" to 2,
+            ),
+        )
     }
 
     @TestFactory
@@ -109,14 +109,19 @@ internal class PlayerChatTest : DialogueTest() {
     }
 
     @Test
-    fun `Sending five or more lines to chat throws exception`() {
-        assertThrows<IllegalStateException> {
-            dialogueBlocking {
-                player<Neutral>(text = "\nOne\nTwo\nThree\nFour\nFive")
-            }
+    fun `Sending five or more lines to splits into multiple messages`() {
+        dialogue {
+            player<Neutral>(text = "\nOne\nTwo\nThree\nFour\nFive")
         }
-        verify(exactly = 0) {
-            player.open(any())
+        (player.dialogueSuspension as ContinueSuspension).resume(Unit)
+        verifyOrder {
+            player.open("dialogue_chat4")
+            interfaces.sendText("dialogue_chat4", "line1", "One")
+            interfaces.sendText("dialogue_chat4", "line2", "Two")
+            interfaces.sendText("dialogue_chat4", "line3", "Three")
+            interfaces.sendText("dialogue_chat4", "line4", "Four")
+            player.open("dialogue_chat1")
+            interfaces.sendText("dialogue_chat1", "line1", "Five")
         }
     }
 
@@ -172,10 +177,8 @@ internal class PlayerChatTest : DialogueTest() {
     @Test
     fun `Player chat not sent if interface not opened`() {
         every { player.open("dialogue_chat1") } returns false
-        assertThrows<IllegalStateException> {
-            dialogueBlocking {
-                player<Neutral>(text = "text")
-            }
+        dialogueBlocking {
+            player<Neutral>(text = "text")
         }
         coVerify(exactly = 0) {
             interfaces.sendText("dialogue_chat1", "line1", "text")

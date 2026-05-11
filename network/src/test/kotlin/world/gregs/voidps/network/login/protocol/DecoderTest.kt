@@ -106,8 +106,8 @@ class DecoderTest {
         EnterName("a string"), // 43
         null, // 84
         null, // 71
-        Walk(1234, 4321), // 35
-        Walk(1234, 4321, minimap = true), // 82
+        Walk(1234, 4321, walk = true), // 35
+        Walk(1234, 4321, walk = true, minimap = true), // 82
         null, // 49
         null, // 8
         SongEnd(12345), // 52
@@ -119,8 +119,7 @@ class DecoderTest {
                 val decoders = decoders(huffman)
                 val decoder = decoders[id]
                 assertNotNull(decoder)
-                val size = decoder!!.length
-                when (size) {
+                when (decoder!!.length) {
                     Decoder.BYTE -> assertTrue(data.size <= Byte.MAX_VALUE)
                     Decoder.SHORT -> assertTrue(data.size <= Short.MAX_VALUE)
                     else -> assertEquals(decoder.length, data.size)
