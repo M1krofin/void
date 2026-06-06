@@ -28,7 +28,11 @@ class Xenia : Script {
     val region = Region(15446)
 
     init {
-        npcOperate("Talk-to", "xenia") {
+        playerSpawn {
+            sendVariable("xenia")
+        }
+
+        npcOperate("Talk-to", "xenia_2") {
             when (quest("blood_pact")) {
                 "unstarted" -> unstarted()
                 "started" -> started()
@@ -63,7 +67,9 @@ class Xenia : Script {
 
         entered("lumbridge_catacombs") {
             if (quest("blood_pact") == "after_cutscene") {
+                val offset = instanceOffset()
                 enterInstance()
+                spawnInstance(offset)
             }
         }
     }
@@ -265,7 +271,9 @@ class Xenia : Script {
         npc<Scared>("ilona_cutscene", "Let me go! I didn't make any blood pact with-")
         reese.face(ilona)
         npc<Angry>("reese_cutscene", "Shut up!")
+        reese.face(kayle)
         npc<Frustrated>("reese_cutscene", "Kayle, you stay here. Guard the door.")
+        reese.face(ilona)
         npc<Frustrated>("reese_cutscene", "You, come on.")
         ilona.walkTo(offset.tile(3877, 5543, 1))
         caitlin.walkTo(offset.tile(3878, 5542, 1))
@@ -279,12 +287,13 @@ class Xenia : Script {
         NPCs.remove(reese)
         cutscene.end(destroyInstance = false)
         set("blood_pact", "after_cutscene")
+        set("xenia", "hidden")
         tele(offset.tile(3877, 5527, 1))
         clearCamera()
         clearAnim()
         spawnInstance(offset)
         open("fade_in")
         delay(1)
-        npc<Neutral>("xenia_after_cutscene", "Looks like there's a guard ahead. We should take him together.")
+        npc<Neutral>("xenia_after_cutscene", "Looks like there's a guard in the room ahead. I think we should be able to overpower him. Speak to me if you have any questions.")
     }
 }

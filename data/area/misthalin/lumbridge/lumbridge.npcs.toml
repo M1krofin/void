@@ -289,6 +289,10 @@ id = 6540
 examine = "A collector of ancient artefacts."
 
 [xenia]
+id = 9633
+examine = "An old adventurer."
+
+[xenia_2]
 id = 11476
 examine = "An old adventurer."
 

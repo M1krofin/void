@@ -2,3 +2,10 @@
 id = 9500
 persist = true
 format = "boolean"
+
+[xenia]
+id = 7238
+persist = true
+format = "list"
+default = "shown"
+values = [ "shown", "hidden" ]
