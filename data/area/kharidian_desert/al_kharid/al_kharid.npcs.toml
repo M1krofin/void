@@ -144,3 +144,7 @@ examine = "Looks a bit lost."
 
 [fishing_spot_al_kharid]
 id = 330
+
+[ali_the_leaflet_dropper]
+id = 3680
+examine = "A young boy handing out flyers."

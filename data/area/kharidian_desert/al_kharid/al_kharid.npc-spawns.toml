@@ -55,4 +55,6 @@ spawns = [
     { id = "man_al_kharid", x = 3293, y = 3205 },
     { id = "apprentice", x = 3321, y = 3139 },
     { id = "sorceress", x = 3320, y = 3138, level = 1 },
+    # 13107
+    { id = "ali_the_leaflet_dropper", x = 3284, y = 3328 }
 ]
